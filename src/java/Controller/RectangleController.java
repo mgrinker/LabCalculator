@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Michael
  */
 @WebServlet(name = "CalculatorController", urlPatterns = {"/CalculatorController"})
-public class CalculatorController extends HttpServlet {
+public class RectangleController extends HttpServlet {
     private static final String RESULT_PAGE = "result.jsp";
 
     /**

@@ -13,11 +13,12 @@ and open the template in the editor.
         <div id="content">
             <h1>Calculators</h1>
             <hr/>
-            <br/><br/><br/>
-            <form id="form1" name="form1" method="POST" action="CalculatorController">
+            
+            <br/><br/>
+            <form id="rectangleForm" class="form" name="rectangleForm" method="POST" action="CalculatorController">
                 <table>
                     <tr>
-                        <th colspan="2">Calculate Area of Rectangle</th>                       
+                        <th colspan="2">Calculate Area of a Rectangle</th>                       
                     </tr>
                     
                     <tr>
@@ -31,10 +32,51 @@ and open the template in the editor.
                     </tr>
                     
                     <tr>
-                        <td><input id="areaSubmit "type="submit" value="Get Area"</td>
+                        <td><input id="areaSubmit" type="submit" value="Get Area"></td>
                         <td></td>
                 </table>
             </form>
+            
+            <br/><br/>
+            <form id="circleForm" class="form" name="circleForm" method="POST" action="">
+                <table>
+                    <tr>
+                        <th colspan="2">Calculate Area of a Circle</th>                       
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Input radius</label></td>
+                        <td><input type="text" id="radius" name="radius"></td>
+                    </tr>
+                                        
+                    <tr>
+                        <td><input id="areaSubmit" type="submit" value="Get Area"></td>
+                        <td></td>
+                </table>
+            </form>
+            
+            <br/><br/>
+            <form id="triangleForm" class="form" name="triangleForm" method="POST" action="">
+                <table>
+                    <tr>
+                        <th colspan="2">Calculate Missing side of triangle</th>                       
+                    </tr>
+                    
+                    <tr>
+                        <td><label>Input side 1</label></td>
+                        <td><input type="text" id="side1" name="side1"></td>
+                    </tr>
+                           
+                    <tr>
+                        <td><label>Input side 2</label></td>
+                        <td><input type="text" id="side2" name="side2"></td>
+                    </tr>
+                    <tr>
+                        <td><input id="areaSubmit" type="submit" value="Get value"></td>
+                        <td></td>
+                </table>
+            </form>
+            
         </div>
     </body>
 </html>
