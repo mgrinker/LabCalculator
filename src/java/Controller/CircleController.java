@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Michael
+ * @author mgrinker
  */
-@WebServlet(name = "CalculatorController", urlPatterns = {"/RectangleController"})
-public class RectangleController extends HttpServlet {
+@WebServlet(name = "CircleController", urlPatterns = {"/CircleController"})
+public class CircleController extends HttpServlet {
     private static final String RESULT_PAGE = "result.jsp";
 
     /**
@@ -40,10 +40,10 @@ public class RectangleController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CalculatorController</title>");            
+            out.println("<title>Servlet CircleController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CalculatorController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CircleController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
@@ -79,12 +79,13 @@ public class RectangleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html");
         
-        String length = request.getParameter("length");
-        String width = request.getParameter("width");
+        String radius = request.getParameter("radius");
+        double dRadius = Double.valueOf(radius);
         
-        double area = Double.parseDouble(length) * Double.parseDouble(width);
+        double area = Math.pow(dRadius, 2) * Math.PI;
         
         request.setAttribute("area", area);
         
@@ -92,7 +93,7 @@ public class RectangleController extends HttpServlet {
                 request.getRequestDispatcher(RESULT_PAGE);
         view.forward(request, response);
         
-//        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
