@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controller;
 
 import java.io.IOException;
@@ -11,18 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.TriangleAreaCalculator;
 
 /**
  *
  * @author mgrinker
  */
-@WebServlet(name = "TriangleController", urlPatterns = {"/TriangleController"})
-public class TriangleController extends HttpServlet {
-    private static final String RESULT_PAGE = "result.jsp";
+@WebServlet(name = "TriangleController2", urlPatterns = {"/TriangleController2"})
+public class TriangleController2 extends HttpServlet {
+    private static final String RESULT_PAGE = "index2.jsp";
     private static final String SIDE1 = "side1";
     private static final String SIDE2 = "side2";
     private static final String TITLE = "The length of the third side is: ";
     private static final String UNITS = " units";
+    private static final String CALC_TYPE = "triangle";
 
     /**
      * Processes requests for both HTTP
@@ -36,20 +35,17 @@ public class TriangleController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");       
+        response.setContentType("text/html;charset=UTF-8");
         
-        double dSide1 = Double.valueOf(request.getParameter(SIDE1));
-        double dSide2 = Double.valueOf(request.getParameter(SIDE2));
+        String side1 = request.getParameter(SIDE1);
+        String side2 = request.getParameter(SIDE2);
         String sAnswer = "";
         
-        try {
-        double answer = Math.sqrt((Math.pow(dSide1, 2)) + (Math.pow(dSide2, 2)));
-        answer = Math.round( answer * 100.0) / 100.0;
-        sAnswer = "" + answer;
-        } catch(NumberFormatException nfe) {
-            sAnswer = "Sorry, there was an error - try again";
-        }
+        TriangleAreaCalculator tac = new TriangleAreaCalculator();
         
+        sAnswer = tac.getMissingTriangleSide(side1.trim(), side2.trim());
+        
+        request.setAttribute("calcType", CALC_TYPE);
         request.setAttribute("title", TITLE);
         request.setAttribute("answer", sAnswer + UNITS);
         

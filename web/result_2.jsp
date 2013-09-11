@@ -14,7 +14,8 @@
     </head>
     <body>
         <div id="content">
-        <h1>Calculator Results</h1>
+        <h1>Calculator Results Page 2</h1>
+        <hr>
         <hr>
         <br/>
         
@@ -35,7 +36,7 @@
         <h1><%= answer %></h1>
         <br/>
         
-        <a href="index.html" style="font-size: 20px;">Back to home page</a>
+        <a href="index_2.html" style="font-size: 20px;">Back to home page</a>
   
         </div>
     </body>

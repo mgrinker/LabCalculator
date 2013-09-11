@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CircleController", urlPatterns = {"/CircleController"})
 public class CircleController extends HttpServlet {
     private static final String RESULT_PAGE = "result.jsp";
+    private static final String RADIUS = "radius";
+    private static final String TITLE = "The area of the circle is: ";
+    private static final String UNITS = " sq. units";
 
     /**
      * Processes requests for both HTTP
@@ -34,21 +33,26 @@ public class CircleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        
+        String radius = request.getParameter(RADIUS);
+        double dRadius = Double.valueOf(radius);
+        String sAnswer = "";
+        
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CircleController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CircleController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+        double answer = Math.pow(dRadius, 2) * Math.PI;
+        answer = Math.round( answer * 100.0) / 100.0;
+        sAnswer = "" + answer;
+        } catch(NumberFormatException nfe) {
+            sAnswer = "Sorry, there was an error - try again";
         }
+        
+        request.setAttribute("title", TITLE);
+        request.setAttribute("answer", sAnswer + UNITS);
+        
+        RequestDispatcher view =
+                request.getRequestDispatcher(RESULT_PAGE);
+        view.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,21 +83,7 @@ public class CircleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html");
-        
-        String radius = request.getParameter("radius");
-        double dRadius = Double.valueOf(radius);
-        
-        double area = Math.pow(dRadius, 2) * Math.PI;
-        
-        request.setAttribute("area", area);
-        
-        RequestDispatcher view =
-                request.getRequestDispatcher(RESULT_PAGE);
-        view.forward(request, response);
-        
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
